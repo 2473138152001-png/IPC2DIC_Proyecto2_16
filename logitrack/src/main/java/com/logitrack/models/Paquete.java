@@ -9,13 +9,13 @@ public class Paquete {
     private String estado;
     private String centroActual;
 
-    public Paquete(String id, String cliente, double peso, String destino, String centroActual) {
+    public Paquete(String id, String cliente, double peso, String destino,String estado, String centroActual) {
         this.id = id;
         this.cliente = cliente;
         this.peso = peso;
         this.destino = destino;
         this.centroActual = centroActual;
-        this.estado = "Pendiente";
+        this.estado = estado;
     }
 
     public String getId() {

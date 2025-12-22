@@ -28,4 +28,3 @@ public class DataStore {
         solicitudes.clear();
     }
 }
-/*hola*/

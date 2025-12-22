@@ -8,16 +8,28 @@ public class Solicitud {
     private int prioridad;
     private String estado;
 
-    public Solicitud(String id, String tipo, String paqueteId, int prioridad) {
+    public Solicitud(String id, String tipo, String paqueteId, int prioridad, String estado) {
         this.id = id;
         this.tipo = tipo;
         this.paqueteId = paqueteId;
         this.prioridad = prioridad;
-        this.estado = "Pendiente";
+        this.estado = estado;
     }
 
     public int getPrioridad() {
         return prioridad;
+    }
+
+    public String getPaqueteId() {
+        return paqueteId;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getId() {

@@ -1,5 +1,6 @@
 package com.logitrack;
 
+import com.logitrack.services.XmlService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LogitrackApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LogitrackApplication.class, args);
-	}
 
+		SpringApplication.run(LogitrackApplication.class, args);
+
+
+	}
 }
