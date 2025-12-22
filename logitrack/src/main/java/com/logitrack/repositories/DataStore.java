@@ -25,6 +25,6 @@ public class DataStore {
         rutas.clear();
         mensajeros.clear();
         paquetes.clear();
-        solicitudes.clear();
+        solicitudes.clear();//hola
     }
 }
