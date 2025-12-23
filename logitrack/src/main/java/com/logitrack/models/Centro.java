@@ -26,8 +26,29 @@ public class Centro {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
     public int getCapacidad() {
         return capacidad;
+    }
+
+    // Cantidad de paquetes actuales
+    public int getCargaActual() {
+        return paquetes.size();
+    }
+
+    // Porcentaje de uso del centro
+    public double getPorcentajeUso() {
+        if (capacidad == 0) {
+            return 0;
+        }
+        return (paquetes.size() * 100.0) / capacidad;
     }
 
     public List<Paquete> getPaquetes() {
@@ -36,5 +57,14 @@ public class Centro {
 
     public List<Mensajero> getMensajeros() {
         return mensajeros;
+    }
+
+    // Setters opcionales (útiles más adelante)
+    public void setPaquetes(List<Paquete> paquetes) {
+        this.paquetes = paquetes;
+    }
+
+    public void setMensajeros(List<Mensajero> mensajeros) {
+        this.mensajeros = mensajeros;
     }
 }

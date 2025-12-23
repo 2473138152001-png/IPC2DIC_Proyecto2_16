@@ -1,0 +1,4 @@
+POST http://localhost:8080/api/importar
+Content-Type: multipart/form-data
+
+file=@logitrack.xml;type=application/xml

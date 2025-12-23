@@ -16,12 +16,20 @@ public class Solicitud {
         this.estado = estado;
     }
 
-    public int getPrioridad() {
-        return prioridad;
+    public String getId() {
+        return id;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public String getPaqueteId() {
         return paqueteId;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
     }
 
     public String getEstado() {
@@ -30,9 +38,5 @@ public class Solicitud {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getId() {
-        return id;
     }
 }
