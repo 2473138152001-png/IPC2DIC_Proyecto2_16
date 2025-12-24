@@ -8,7 +8,7 @@ public class Mensajero {
     private String estado;
     private String centroActual;
 
-    // Constructor simple (coincide con el XML)
+
     public Mensajero(String id, String nombre, int capacidad, String centroActual) {
         this.id = id;
         this.nombre = nombre;
@@ -21,6 +21,14 @@ public class Mensajero {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -29,11 +37,11 @@ public class Mensajero {
         return centroActual;
     }
 
-    public void setCentroActual(String centroActual) {
-        this.centroActual = centroActual;
-    }
-
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public void setCentroActual(String centroActual) {
+        this.centroActual = centroActual;
     }
 }

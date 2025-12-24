@@ -15,7 +15,13 @@ public class Ruta {
     }
 
     public String getId() {
+
         return id;
+    }
+
+
+    public int getDistancia() {
+        return distancia;
     }
 
     public String getOrigen() {
@@ -24,5 +30,17 @@ public class Ruta {
 
     public String getDestino() {
         return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
     }
 }

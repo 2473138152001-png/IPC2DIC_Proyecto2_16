@@ -91,6 +91,8 @@ public class LogitrackController {
 
     @PostMapping("/procesar")
     public List<Solicitud> procesarSolicitudes() {
-        return procesamientoService.procesarSolicitudes();
+        ProcesamientoService servicio = new ProcesamientoService();
+        return servicio.procesarSolicitudes();
+
     }
 }
