@@ -8,6 +8,7 @@ public class Paquete {
     private String destino;
     private String estado;
     private String centroActual;
+    private String ultimaActualizacion;
 
     public Paquete(String id, String cliente, double peso, String destino, String estado, String centroActual) {
         this.id = id;
@@ -48,5 +49,12 @@ public class Paquete {
 
     public void setCentroActual(String centroActual) {
         this.centroActual = centroActual;
+    }
+    public String getUltimaActualizacion() {
+        return ultimaActualizacion;
+    }
+
+    public void setUltimaActualizacion(String ultimaActualizacion) {
+        this.ultimaActualizacion = ultimaActualizacion;
     }
 }
