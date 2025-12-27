@@ -1,0 +1,124 @@
+/* ================================
+   ESTILOS GENERALES DEL SISTEMA
+   Proyecto: LogiTrack
+   Descripción: hoja de estilos principal
+   ================================ */
+
+/* ---- configuración general ---- */
+body {
+  margin: 0;                    /* elimina márgenes por defecto */
+  background: #0f172a;          /* color de fondo principal */
+  color: #e2e8f0;               /* color de texto general */
+  font-family: Arial, system-ui, sans-serif;
+}
+
+/* ---- contenedor principal ---- */
+.container {
+  max-width: 1200px;            /* ancho máximo del contenido */
+  margin: 0 auto;               /* centra el contenido */
+  padding: 18px;                /* espacio interno */
+}
+
+/* ---- tarjetas (cards) ---- */
+.card {
+  background: #111827;          /* fondo de las tarjetas */
+  border: 1px solid #1f2937;    /* borde de la tarjeta */
+  border-radius: 12px;          /* esquinas redondeadas */
+  padding: 14px;                /* espacio interno */
+  margin-bottom: 12px;          /* separación entre tarjetas */
+}
+
+/* ---- títulos ---- */
+.title {
+  margin: 0 0 10px 0;           /* separación inferior */
+  font-size: 18px;              /* tamaño del texto */
+  font-weight: 700;             /* texto en negrita */
+}
+
+/* ---- texto pequeño ---- */
+.small {
+  font-size: 13px;              /* tamaño reducido */
+  opacity: 0.85;                /* texto más suave */
+}
+
+/* ---- separador horizontal ---- */
+.hr {
+  height: 1px;                  /* grosor del separador */
+  background: #1f2937;          /* color del separador */
+  margin: 12px 0;               /* separación arriba y abajo */
+}
+
+/* ---- filas de botones o inputs ---- */
+.row {
+  display: flex;                /* elementos en fila */
+  gap: 10px;                    /* separación entre elementos */
+  flex-wrap: wrap;              /* permite salto de línea */
+  align-items: center;
+}
+
+/* ---- botones principales ---- */
+.btn {
+  background: #2563eb;          /* color azul principal */
+  color: white;                 /* texto blanco */
+  border: 0;                    /* sin borde */
+  padding: 10px 12px;           /* tamaño del botón */
+  border-radius: 10px;          /* bordes redondeados */
+  cursor: pointer;              /* cursor tipo botón */
+}
+
+/* botón deshabilitado */
+.btn:disabled {
+  opacity: 0.6;                 /* se ve más claro */
+  cursor: not-allowed;
+}
+
+/* ---- botones secundarios ---- */
+.btn2 {
+  background: #334155;          /* color secundario */
+  color: white;
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ---- inputs y selects ---- */
+.input,
+.select {
+  background: #0b1220;          /* fondo oscuro */
+  color: #e2e8f0;               /* texto claro */
+  border: 1px solid #334155;    /* borde del input */
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;                /* sin borde azul al seleccionar */
+}
+
+/* ---- barra de navegación ---- */
+.nav {
+  display: flex;                /* botones en fila */
+  gap: 10px;                    /* separación entre botones */
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+/* botones del menú */
+.nav button {
+  background: #0b1220;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  border-radius: 999px;         /* botón tipo píldora */
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* botón activo del menú */
+.nav button.active {
+  background: #2563eb;          /* color azul */
+  border-color: #2563eb;
+}
+
+/* ---- texto preformateado (JSON) ---- */
+pre {
+  white-space: pre-wrap;        /* respeta saltos de línea */
+  word-break: break-word;       /* corta palabras largas */
+}

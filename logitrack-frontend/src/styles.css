@@ -1,0 +1,122 @@
+/* fuente general */
+:root {
+  font-family: Arial, system-ui, sans-serif;
+}
+
+/* estilos generales del body */
+body {
+  margin: 0;                  /* quita margen */
+  background: #0f172a;        /* fondo principal */
+  color: #e2e8f0;             /* color del texto */
+}
+
+/* contenedor principal */
+.container {
+  max-width: 1200px;          /* ancho máximo */
+  margin: 0 auto;             /* centra contenido */
+  padding: 18px;              /* espacio interno */
+}
+
+/* tarjeta base */
+.card {
+  background: #111827;        /* fondo tarjeta */
+  border: 1px solid #1f2937;  /* borde */
+  border-radius: 12px;        /* esquinas */
+  padding: 14px;              /* espacio interno */
+  margin-bottom: 12px;        /* separación */
+}
+
+/* fila de elementos */
+.row {
+  display: flex;              /* en fila */
+  gap: 10px;                  /* separación */
+  flex-wrap: wrap;            /* salto de línea */
+  align-items: center;
+}
+
+/* botón principal */
+.btn {
+  background: #2563eb;        /* azul principal */
+  color: white;
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* botón deshabilitado */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* botón secundario */
+.btn2 {
+  background: #334155;        /* gris */
+  color: white;
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* inputs y selects */
+.input,
+.select {
+  background: #0b1220;        /* fondo input */
+  color: #e2e8f0;             /* texto */
+  border: 1px solid #334155;  /* borde */
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+}
+
+/* títulos */
+.title {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* texto pequeño */
+.small {
+  opacity: 0.85;
+  font-size: 13px;
+}
+
+/* separador */
+.hr {
+  height: 1px;
+  background: #1f2937;
+  margin: 12px 0;
+}
+
+/* barra de navegación */
+.nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+/* botones del menú */
+.nav button {
+  background: #0b1220;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* botón activo */
+.nav button.active {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* salida de texto / json */
+pre {
+  white-space: pre-wrap;      /* respeta saltos */
+  word-break: break-word;     /* corta texto largo */
+}
