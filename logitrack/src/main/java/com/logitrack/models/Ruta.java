@@ -7,6 +7,10 @@ public class Ruta {
     private String destino;
     private int distancia;
 
+    // ✅ constructor vacío (obligatorio para JSON)
+    public Ruta() {
+    }
+
     public Ruta(String id, String origen, String destino, int distancia) {
         this.id = id;
         this.origen = origen;
@@ -15,17 +19,20 @@ public class Ruta {
     }
 
     public String getId() {
-
         return id;
     }
 
-
-    public int getDistancia() {
-        return distancia;
+    // ✅ setter faltante
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOrigen() {
         return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
     }
 
     public String getDestino() {
@@ -36,11 +43,11 @@ public class Ruta {
         this.destino = destino;
     }
 
-    public void setDistancia(int distancia) {
-        this.distancia = distancia;
+    public int getDistancia() {
+        return distancia;
     }
 
-    public void setOrigen(String origen) {
-        this.origen = origen;
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
     }
 }

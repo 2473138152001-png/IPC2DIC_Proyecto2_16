@@ -10,6 +10,10 @@ public class Paquete {
     private String centroActual;
     private String ultimaActualizacion;
 
+    // ✅ Constructor vacío para JSON
+    public Paquete() {
+    }
+
     public Paquete(String id, String cliente, double peso, String destino, String estado, String centroActual) {
         this.id = id;
         this.cliente = cliente;
@@ -23,33 +27,51 @@ public class Paquete {
         return id;
     }
 
+    // ✅ setters necesarios para JSON
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getCliente() {
         return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public double getPeso() {
         return peso;
     }
 
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
     public String getDestino() {
         return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
     }
 
     public String getEstado() {
         return estado;
     }
 
-    public String getCentroActual() {
-        return centroActual;
-    }
-
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getCentroActual() {
+        return centroActual;
     }
 
     public void setCentroActual(String centroActual) {
         this.centroActual = centroActual;
     }
+
     public String getUltimaActualizacion() {
         return ultimaActualizacion;
     }

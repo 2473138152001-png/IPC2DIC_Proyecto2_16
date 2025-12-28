@@ -13,17 +13,13 @@ import java.util.Collection;
 @RequestMapping("/api/paquetes")
 public class PaqueteController {
 
-
     // GET - Listar todos
-
     @GetMapping
     public Collection<Paquete> listarPaquetes() {
         return DataStore.paquetes.values();
     }
 
-
     // GET - Obtener por ID
-
     @GetMapping("/{id}")
     public Paquete obtenerPaquete(@PathVariable String id) {
         Paquete p = DataStore.paquetes.get(id);
@@ -36,11 +32,17 @@ public class PaqueteController {
         return p;
     }
 
-
     // POST - Crear paquete
-
     @PostMapping
     public Paquete crearPaquete(@RequestBody Paquete nuevo) {
+
+        if (nuevo.getId() == null || nuevo.getId().trim().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID requerido");
+        }
+
+        if (DataStore.paquetes.containsKey(nuevo.getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe un paquete con ese ID");
+        }
 
         if (nuevo.getPeso() <= 0) {
             throw new ResponseStatusException(
@@ -57,9 +59,13 @@ public class PaqueteController {
             );
         }
 
+        // ✅ el estado real lo controla el sistema
         nuevo.setEstado("PENDIENTE");
+
+        // guardar
         DataStore.paquetes.put(nuevo.getId(), nuevo);
 
+        // agregar al centro actual (si existe)
         Centro centroActual = DataStore.centros.get(nuevo.getCentroActual());
         if (centroActual != null) {
             centroActual.getPaquetes().add(nuevo);
@@ -68,9 +74,7 @@ public class PaqueteController {
         return nuevo;
     }
 
-
-    // PUT - Actualizar paquete
-
+    // PUT - Actualizar paquete (estado y/o centroActual)
     @PutMapping("/{id}")
     public Paquete actualizarPaquete(@PathVariable String id,
                                      @RequestBody Paquete datos) {
@@ -83,22 +87,41 @@ public class PaqueteController {
             );
         }
 
-        if (datos.getPeso() <= 0) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Peso inválido"
-            );
+        // ✅ si mandan estado, se actualiza
+        if (datos.getEstado() != null && !datos.getEstado().trim().isEmpty()) {
+            p.setEstado(datos.getEstado().trim());
         }
 
-        p.setEstado(datos.getEstado());
-        p.setCentroActual(datos.getCentroActual());
+        // ✅ si mandan centroActual, validar y mover de listas
+        if (datos.getCentroActual() != null && !datos.getCentroActual().trim().isEmpty()) {
+
+            String nuevoCentroId = datos.getCentroActual().trim();
+            Centro nuevoCentro = DataStore.centros.get(nuevoCentroId);
+
+            if (nuevoCentro == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Centro actual no existe"
+                );
+            }
+
+            // quitar del centro anterior
+            Centro centroAnterior = DataStore.centros.get(p.getCentroActual());
+            if (centroAnterior != null) {
+                centroAnterior.getPaquetes().remove(p);
+            }
+
+            // agregar al nuevo centro
+            nuevoCentro.getPaquetes().add(p);
+
+            // setear
+            p.setCentroActual(nuevoCentroId);
+        }
 
         return p;
     }
 
-
     // DELETE - Eliminar paquete
-
     @DeleteMapping("/{id}")
     public void eliminarPaquete(@PathVariable String id) {
 
@@ -110,8 +133,8 @@ public class PaqueteController {
             );
         }
 
-        if (p.getEstado().equals("EN_TRANSITO") ||
-                p.getEstado().equals("ENTREGADO")) {
+        if ("EN_TRANSITO".equals(p.getEstado()) ||
+                "ENTREGADO".equals(p.getEstado())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "No se puede eliminar un paquete en tránsito o entregado"

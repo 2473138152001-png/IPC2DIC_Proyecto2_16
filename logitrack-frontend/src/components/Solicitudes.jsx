@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
   getSolicitudes,
+  crearSolicitud,
+  eliminarSolicitud,
   procesarTopSolicitud,
   procesarNSolicitudes
 } from "../api/api";
@@ -9,6 +11,8 @@ import {
  * Componente Solicitudes
  * Función: manejar la cola de prioridad de solicitudes
  * - Consultar la cola
+ * - Crear solicitudes
+ * - Eliminar solicitudes
  * - Procesar la solicitud más prioritaria
  * - Procesar N solicitudes
  */
@@ -19,6 +23,15 @@ function Solicitudes(props) {
   const [estaCargando, setEstaCargando] = useState(false);
   const [cantidadN, setCantidadN] = useState("3");
   const [textoRespuesta, setTextoRespuesta] = useState("");
+
+  // crear
+  const [idSolicitud, setIdSolicitud] = useState("");
+  const [tipoSolicitud, setTipoSolicitud] = useState("EnvioNormal");
+  const [paqueteSolicitud, setPaqueteSolicitud] = useState("");
+  const [prioridadSolicitud, setPrioridadSolicitud] = useState("");
+
+  // eliminar
+  const [idEliminar, setIdEliminar] = useState("");
 
   // -------- métodos auxiliares --------
   function limpiarMensajes() {
@@ -62,6 +75,17 @@ function Solicitudes(props) {
     return valor;
   }
 
+  function validarPrioridad() {
+    const valor = parseInt(prioridadSolicitud, 10);
+
+    if (Number.isNaN(valor) || valor <= 0) {
+      props.setError("La prioridad debe ser un número mayor que 0.");
+      return null;
+    }
+
+    return valor;
+  }
+
   // -------- acciones --------
   async function cargarSolicitudes() {
     limpiarMensajes();
@@ -83,6 +107,65 @@ function Solicitudes(props) {
     }
   }
 
+  async function crearNuevaSolicitud() {
+    limpiarMensajes();
+
+    const valorPrioridad = validarPrioridad();
+    if (valorPrioridad === null) {
+      return;
+    }
+
+    setEstaCargando(true);
+
+    try {
+      const data = {
+        id: idSolicitud.trim(),
+        tipo: tipoSolicitud,
+        paqueteId: paqueteSolicitud.trim(),
+        prioridad: valorPrioridad
+      };
+
+      const respuesta = await crearSolicitud(data);
+
+      setTextoRespuesta(formatearRespuesta(respuesta));
+      props.setOk("Solicitud creada correctamente.");
+
+      setIdSolicitud("");
+      setPaqueteSolicitud("");
+      setPrioridadSolicitud("");
+
+      await cargarSolicitudes();
+
+    } catch (error) {
+      props.setError(error.message);
+
+    } finally {
+      setEstaCargando(false);
+    }
+  }
+
+  async function eliminarSolicitudExistente() {
+    limpiarMensajes();
+    setEstaCargando(true);
+
+    try {
+      const respuesta = await eliminarSolicitud(idEliminar.trim());
+
+      // puede devolver texto vacío, por eso lo formateamos
+      setTextoRespuesta(formatearRespuesta(respuesta));
+      props.setOk("Solicitud eliminada correctamente.");
+
+      setIdEliminar("");
+      await cargarSolicitudes();
+
+    } catch (error) {
+      props.setError(error.message);
+
+    } finally {
+      setEstaCargando(false);
+    }
+  }
+
   async function procesarSolicitudTop() {
     limpiarMensajes();
     setEstaCargando(true);
@@ -93,6 +176,8 @@ function Solicitudes(props) {
 
       setTextoRespuesta(texto);
       props.setOk("Procesada la solicitud más prioritaria.");
+
+      await cargarSolicitudes();
 
     } catch (error) {
       props.setError(error.message);
@@ -118,6 +203,8 @@ function Solicitudes(props) {
 
       setTextoRespuesta(texto);
       props.setOk("Procesadas " + valorN + " solicitudes.");
+
+      await cargarSolicitudes();
 
     } catch (error) {
       props.setError(error.message);
@@ -168,6 +255,69 @@ function Solicitudes(props) {
 
       <div className="hr"></div>
 
+      <h4 style={{ margin: "0 0 8px 0" }}>Crear solicitud</h4>
+      <div className="row">
+        <input
+          className="input"
+          placeholder="ID (S001)"
+          value={idSolicitud}
+          onChange={(e) => setIdSolicitud(e.target.value)}
+        />
+
+        <select
+          className="select"
+          value={tipoSolicitud}
+          onChange={(e) => setTipoSolicitud(e.target.value)}
+        >
+          <option value="EnvioNormal">EnvioNormal</option>
+          <option value="EnvioExpress">EnvioExpress</option>
+        </select>
+
+        <input
+          className="input"
+          placeholder="Paquete ID (P001)"
+          value={paqueteSolicitud}
+          onChange={(e) => setPaqueteSolicitud(e.target.value)}
+        />
+
+        <input
+          className="input"
+          placeholder="Prioridad (7)"
+          value={prioridadSolicitud}
+          onChange={(e) => setPrioridadSolicitud(e.target.value)}
+        />
+
+        <button
+          className="btn"
+          onClick={crearNuevaSolicitud}
+          disabled={estaCargando || !idSolicitud || !paqueteSolicitud || !prioridadSolicitud}
+        >
+          Crear
+        </button>
+      </div>
+
+      <div className="hr"></div>
+
+      <h4 style={{ margin: "0 0 8px 0" }}>Eliminar solicitud</h4>
+      <div className="row">
+        <input
+          className="input"
+          placeholder="ID (S001)"
+          value={idEliminar}
+          onChange={(e) => setIdEliminar(e.target.value)}
+        />
+
+        <button
+          className="btn2"
+          onClick={eliminarSolicitudExistente}
+          disabled={estaCargando || !idEliminar}
+        >
+          Eliminar
+        </button>
+      </div>
+
+      <div className="hr"></div>
+
       {listaSolicitudes.length === 0 && (
         <p className="small">
           No hay solicitudes cargadas o todavía no se ha consultado al backend.
@@ -183,7 +333,7 @@ function Solicitudes(props) {
       {textoRespuesta !== "" && (
         <>
           <div className="hr"></div>
-          <p className="small">Respuesta del procesamiento:</p>
+          <p className="small">Respuesta del backend:</p>
           <pre>{textoRespuesta}</pre>
         </>
       )}

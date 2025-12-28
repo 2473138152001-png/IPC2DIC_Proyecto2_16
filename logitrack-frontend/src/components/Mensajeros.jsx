@@ -1,16 +1,38 @@
 import React, { useState } from "react";
-import { getMensajeros } from "../api/api";
+import {
+  getMensajeros,
+  crearMensajero,
+  cambiarEstadoMensajero,
+  cambiarCentroMensajero
+} from "../api/api";
 
 /*
  * Componente Mensajeros
- * Función: consumir GET /api/mensajeros
- * y mostrar la lista de mensajeros del sistema
+ * Función:
+ * - GET /api/mensajeros (listar)
+ * - POST /api/mensajeros (crear)
+ * - PUT /api/mensajeros/{id}/estado (cambiar estado)
+ * - PUT /api/mensajeros/{id}/centro (cambiar centro)
  */
 function Mensajeros(props) {
 
   // -------- estados --------
   const [listaMensajeros, setListaMensajeros] = useState([]);
   const [estaCargando, setEstaCargando] = useState(false);
+
+  // crear
+  const [idMensajero, setIdMensajero] = useState("");
+  const [nombreMensajero, setNombreMensajero] = useState("");
+  const [capacidadMensajero, setCapacidadMensajero] = useState("");
+  const [centroMensajero, setCentroMensajero] = useState("");
+
+  // cambiar estado
+  const [idEstado, setIdEstado] = useState("");
+  const [estadoNuevo, setEstadoNuevo] = useState("DISPONIBLE");
+
+  // cambiar centro
+  const [idCentro, setIdCentro] = useState("");
+  const [centroNuevo, setCentroNuevo] = useState("");
 
   // -------- métodos --------
   function limpiarMensajes() {
@@ -50,6 +72,67 @@ function Mensajeros(props) {
     }
   }
 
+  async function crearNuevoMensajero() {
+    limpiarMensajes();
+
+    try {
+      const data = {
+        id: idMensajero.trim(),
+        nombre: nombreMensajero.trim(),
+        capacidad: Number(capacidadMensajero),
+        centroActual: centroMensajero.trim()
+        // estado no es necesario mandarlo, tu backend lo pone a DISPONIBLE
+      };
+
+      await crearMensajero(data);
+
+      props.setOk("Mensajero creado correctamente.");
+
+      setIdMensajero("");
+      setNombreMensajero("");
+      setCapacidadMensajero("");
+      setCentroMensajero("");
+
+      await cargarMensajeros();
+
+    } catch (error) {
+      props.setError(error.message);
+    }
+  }
+
+  async function actualizarEstado() {
+    limpiarMensajes();
+
+    try {
+      await cambiarEstadoMensajero(idEstado.trim(), estadoNuevo);
+
+      props.setOk("Estado actualizado correctamente.");
+      setIdEstado("");
+
+      await cargarMensajeros();
+
+    } catch (error) {
+      props.setError(error.message);
+    }
+  }
+
+  async function reasignarCentro() {
+    limpiarMensajes();
+
+    try {
+      await cambiarCentroMensajero(idCentro.trim(), centroNuevo.trim());
+
+      props.setOk("Centro reasignado correctamente.");
+      setIdCentro("");
+      setCentroNuevo("");
+
+      await cargarMensajeros();
+
+    } catch (error) {
+      props.setError(error.message);
+    }
+  }
+
   // -------- render --------
   return (
     <div className="card">
@@ -62,6 +145,99 @@ function Mensajeros(props) {
           disabled={estaCargando}
         >
           {estaCargando ? "Cargando..." : "Cargar mensajeros"}
+        </button>
+      </div>
+
+      <div className="hr"></div>
+
+      <h4 style={{ margin: "0 0 8px 0" }}>Crear mensajero</h4>
+      <div className="row">
+        <input
+          className="input"
+          placeholder="ID (M001)"
+          value={idMensajero}
+          onChange={(e) => setIdMensajero(e.target.value)}
+        />
+        <input
+          className="input"
+          placeholder="Nombre"
+          value={nombreMensajero}
+          onChange={(e) => setNombreMensajero(e.target.value)}
+        />
+        <input
+          className="input"
+          placeholder="Capacidad (10)"
+          value={capacidadMensajero}
+          onChange={(e) => setCapacidadMensajero(e.target.value)}
+        />
+        <input
+          className="input"
+          placeholder="Centro (C001)"
+          value={centroMensajero}
+          onChange={(e) => setCentroMensajero(e.target.value)}
+        />
+
+        <button
+          className="btn"
+          onClick={crearNuevoMensajero}
+          disabled={!idMensajero || !nombreMensajero || !capacidadMensajero || !centroMensajero}
+        >
+          Crear
+        </button>
+      </div>
+
+      <div className="hr"></div>
+
+      <h4 style={{ margin: "0 0 8px 0" }}>Cambiar estado</h4>
+      <div className="row">
+        <input
+          className="input"
+          placeholder="ID (M001)"
+          value={idEstado}
+          onChange={(e) => setIdEstado(e.target.value)}
+        />
+
+        <select
+          className="select"
+          value={estadoNuevo}
+          onChange={(e) => setEstadoNuevo(e.target.value)}
+        >
+          <option value="DISPONIBLE">DISPONIBLE</option>
+          <option value="EN_TRANSITO">EN_TRANSITO</option>
+        </select>
+
+        <button
+          className="btn2"
+          onClick={actualizarEstado}
+          disabled={!idEstado}
+        >
+          Actualizar estado
+        </button>
+      </div>
+
+      <div className="hr"></div>
+
+      <h4 style={{ margin: "0 0 8px 0" }}>Cambiar centro</h4>
+      <div className="row">
+        <input
+          className="input"
+          placeholder="ID (M001)"
+          value={idCentro}
+          onChange={(e) => setIdCentro(e.target.value)}
+        />
+        <input
+          className="input"
+          placeholder="Nuevo centro (C002)"
+          value={centroNuevo}
+          onChange={(e) => setCentroNuevo(e.target.value)}
+        />
+
+        <button
+          className="btn2"
+          onClick={reasignarCentro}
+          disabled={!idCentro || !centroNuevo}
+        >
+          Cambiar centro
         </button>
       </div>
 

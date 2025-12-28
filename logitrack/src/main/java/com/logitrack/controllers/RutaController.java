@@ -10,21 +10,19 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/rutas")
-
 public class RutaController {
 
-    //GET listar todas las rutas
+    // GET listar todas las rutas
     @GetMapping
-    public Collection<Ruta> listarRutas(){
+    public Collection<Ruta> listarRutas() {
         return DataStore.rutas.values();
     }
 
-    // GET Obtener ruta por id
-
+    // GET obtener ruta por id
     @GetMapping("/{id}")
-    public Ruta obtenetRuta(@PathVariable String id){
+    public Ruta obtenerRuta(@PathVariable String id) {
         Ruta ruta = DataStore.rutas.get(id);
-        if(ruta == null){
+        if (ruta == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     "Ruta no encontrada"
@@ -33,46 +31,54 @@ public class RutaController {
         return ruta;
     }
 
-    //POST crear ruta
-
+    // POST crear ruta
     @PostMapping
-    public Ruta crearRuta(@RequestBody Ruta nuevaRuta){
-        if (DataStore.rutas.containsKey(nuevaRuta.getId())){
+    public Ruta crearRuta(@RequestBody Ruta nuevaRuta) {
+
+        if (DataStore.rutas.containsKey(nuevaRuta.getId())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Ya existe una ruta con este id"
             );
         }
-        for (Ruta r: DataStore.rutas.values()){
-            if (r.getOrigen().equals(nuevaRuta.getOrigen()) && r.getDestino().equals(nuevaRuta.getDestino())){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+
+        // validar origen-destino duplicado
+        for (Ruta r : DataStore.rutas.values()) {
+            if (r.getOrigen().equals(nuevaRuta.getOrigen())
+                    && r.getDestino().equals(nuevaRuta.getDestino())) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
                         "Ya existe la ruta con ese origen y destino"
                 );
             }
         }
+
         DataStore.rutas.put(nuevaRuta.getId(), nuevaRuta);
         return nuevaRuta;
     }
 
-    //PUT actualizar ruta
+    // PUT actualizar ruta
     @PutMapping("/{id}")
-    public Ruta actualizarRuta(@PathVariable String id, @RequestBody Ruta datos){
+    public Ruta actualizarRuta(@PathVariable String id,
+                               @RequestBody Ruta datos) {
 
         Ruta ruta = DataStore.rutas.get(id);
-        if(ruta == null){
+        if (ruta == null) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Ruta no encontrada"
+                    HttpStatus.NOT_FOUND,
+                    "Ruta no encontrada"
             );
         }
-        ruta.setDestino(datos.getOrigen());
+
+        // ✅ CORRECCIÓN REAL
+        ruta.setOrigen(datos.getOrigen());
         ruta.setDestino(datos.getDestino());
         ruta.setDistancia(datos.getDistancia());
+
         return ruta;
     }
 
-
-    // DELETE - Eliminar ruta
-
+    // DELETE eliminar ruta
     @DeleteMapping("/{id}")
     public void eliminarRuta(@PathVariable String id) {
 
@@ -84,8 +90,6 @@ public class RutaController {
             );
         }
 
-
         DataStore.rutas.remove(id);
     }
-
 }

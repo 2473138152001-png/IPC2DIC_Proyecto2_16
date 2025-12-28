@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logitrack>
+  <configuracion>
+    <centros>
+      <centro id="C001">
+        <nombre>Centro Norte</nombre>
+        <ciudad>Guatemala City</ciudad>
+        <capacidad>300</capacidad>
+      </centro>
+      <centro id="C002">
+        <nombre>Centro Occidente</nombre>
+        <ciudad>Quetzaltenango</ciudad>
+        <capacidad>200</capacidad>
+      </centro>
+      <centro id="C003">
+        <nombre>Centro Sur</nombre>
+        <ciudad>Escuintla</ciudad>
+        <capacidad>150</capacidad>
+      </centro>
+    </centros>
+
+    <rutas>
+      <ruta id="R001" origen="C001" destino="C002" distancia="205"/>
+      <ruta id="R002" origen="C002" destino="C001" distancia="210"/>
+      <ruta id="R003" origen="C001" destino="C003" distancia="120"/>
+      <ruta id="R004" origen="C003" destino="C001" distancia="125"/>
+      <ruta id="R005" origen="C002" destino="C003" distancia="180"/>
+      <ruta id="R006" origen="C003" destino="C002" distancia="185"/>
+    </rutas>
+
+    <mensajeros>
+      <mensajero id="M001" nombre="Carlos Méndez" capacidad="30" centro="C001"/>
+      <mensajero id="M002" nombre="Ana López" capacidad="25" centro="C002"/>
+      <mensajero id="M003" nombre="Luis Pérez" capacidad="30" centro="C003"/>
+    </mensajeros>
+
+    <paquetes>
+      <paquete id="P001" cliente="Empresa X" peso="15" destino="C002" estado="PENDIENTE" centroActual="C001"/>
+      <paquete id="P002" cliente="Startup Y" peso="8" destino="C003" estado="PENDIENTE" centroActual="C001"/>
+      <paquete id="P003" cliente="Persona Z" peso="5" destino="C001" estado="PENDIENTE" centroActual="C002"/>
+      <paquete id="P004" cliente="Empresa W" peso="20" destino="C003" estado="PENDIENTE" centroActual="C002"/>
+      <paquete id="P005" cliente="Cliente A" peso="10" destino="C001" estado="PENDIENTE" centroActual="C003"/>
+    </paquetes>
+
+    <solicitudes>
+      <solicitud id="S001" tipo="EnvioNormal" paquete="P001" prioridad="7"/>
+      <solicitud id="S002" tipo="EnvioNormal" paquete="P002" prioridad="9"/>
+      <solicitud id="S003" tipo="EnvioNormal" paquete="P003" prioridad="5"/>
+      <solicitud id="S004" tipo="EnvioNormal" paquete="P004" prioridad="6"/>
+      <solicitud id="S005" tipo="EnvioNormal" paquete="P005" prioridad="8"/>
+    </solicitudes>
+  </configuracion>
+</logitrack>

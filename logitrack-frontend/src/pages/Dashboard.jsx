@@ -6,6 +6,7 @@ import Rutas from "../components/Rutas";
 import Mensajeros from "../components/Mensajeros";
 import Paquetes from "../components/Paquetes";
 import Solicitudes from "../components/Solicitudes";
+import Envios from "../components/Envios";
 import Mensajes from "../components/Mensajes";
 
 export default function Dashboard() {
@@ -32,6 +33,7 @@ export default function Dashboard() {
       {tab === "mensajeros" && <Mensajeros setOk={setOk} setError={setError} />}
       {tab === "paquetes" && <Paquetes setOk={setOk} setError={setError} />}
       {tab === "solicitudes" && <Solicitudes setOk={setOk} setError={setError} />}
+      {tab === "envios" && <Envios setOk={setOk} setError={setError} />} {/* ✅ AGREGADO */}
     </div>
   );
 }

@@ -70,15 +70,6 @@ public class LogitrackController {
         return centro.getMensajeros();
     }
 
-    @GetMapping("/paquetes")
-    public Collection<Paquete> obtenerPaquetes() {
-        return DataStore.paquetes.values();
-    }
-
-    @GetMapping("/solicitudes")
-    public Collection<Solicitud> obtenerSolicitudes() {
-        return DataStore.solicitudes;
-    }
 
     // ----------------------------
     // POST - ACCIONES
@@ -90,9 +81,8 @@ public class LogitrackController {
     }
 
     @PostMapping("/procesar")
-    public List<Solicitud> procesarSolicitudes() {
-        ProcesamientoService servicio = new ProcesamientoService();
-        return servicio.procesarSolicitudes();
+        public List<Solicitud> procesarSolicitudes() {
+            return procesamientoService.procesarSolicitudes();
+        }
 
-    }
 }

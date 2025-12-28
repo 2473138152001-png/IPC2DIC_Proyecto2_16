@@ -14,7 +14,8 @@ function Navbar(props) {
     { id: "rutas", texto: "Rutas" },
     { id: "mensajeros", texto: "Mensajeros" },
     { id: "paquetes", texto: "Paquetes" },
-    { id: "solicitudes", texto: "Solicitudes" }
+    { id: "solicitudes", texto: "Solicitudes" },
+    { id: "envios", texto: "Envíos + XML" } // ✅ AGREGADO
   ];
 
   // -------- métodos --------
