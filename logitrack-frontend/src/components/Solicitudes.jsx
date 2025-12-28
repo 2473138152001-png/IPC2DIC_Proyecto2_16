@@ -26,7 +26,7 @@ function Solicitudes(props) {
 
   // crear
   const [idSolicitud, setIdSolicitud] = useState("");
-  const [tipoSolicitud, setTipoSolicitud] = useState("EnvioNormal");
+  const [tipoSolicitud, setTipoSolicitud] = useState("Envio Normal");
   const [paqueteSolicitud, setPaqueteSolicitud] = useState("");
   const [prioridadSolicitud, setPrioridadSolicitud] = useState("");
 
@@ -269,8 +269,8 @@ function Solicitudes(props) {
           value={tipoSolicitud}
           onChange={(e) => setTipoSolicitud(e.target.value)}
         >
-          <option value="EnvioNormal">EnvioNormal</option>
-          <option value="EnvioExpress">EnvioExpress</option>
+          <option value="Envio Normal">EnvioNormal</option>
+          <option value="Envio Express">EnvioExpress</option>
         </select>
 
         <input

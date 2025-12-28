@@ -50,7 +50,7 @@ public class XmlService {
             document.getDocumentElement().normalize();
 
             // -------------------------
-            // Validación estructura mínima (regla de negocio)
+            // Validación estructura mínima
             // -------------------------
             String raiz = document.getDocumentElement() != null
                     ? document.getDocumentElement().getNodeName()
@@ -174,7 +174,7 @@ public class XmlService {
                     continue;
                 }
 
-                // referencia: centros deben existir
+                // referencia a que centros deben existir
                 if (!DataStore.centros.containsKey(origen) || !DataStore.centros.containsKey(destino)) {
                     errores.add("Ruta " + id + ": origen/destino no existe (se omitió).");
                     continue;
@@ -328,7 +328,6 @@ public class XmlService {
     // =========================================================
     private void asociarCentros(List<String> errores) {
 
-        // ✅ CLAVE: si recargás, no queremos duplicar paquetes/mensajeros dentro del centro
         for (Centro c : DataStore.centros.values()) {
             c.getPaquetes().clear();
             c.getMensajeros().clear();

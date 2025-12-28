@@ -1,14 +1,13 @@
 package com.logitrack.models;
 
 public class Mensajero {
-
     private String id;
     private String nombre;
     private int capacidad;
+    private double cargaActual;
     private String estado;
     private String centroActual;
 
-    // ✅ Constructor vacío para JSON
     public Mensajero() {
     }
 
@@ -17,8 +16,7 @@ public class Mensajero {
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.centroActual = centroActual;
-
-        // ✅ consistente con el controller
+        this.cargaActual = 0;
         this.estado = "DISPONIBLE";
     }
 
@@ -26,7 +24,6 @@ public class Mensajero {
         return id;
     }
 
-    // ✅ setters para JSON
     public void setId(String id) {
         this.id = id;
     }
@@ -45,6 +42,14 @@ public class Mensajero {
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public double getCargaActual() {
+        return cargaActual;
+    }
+
+    public void setCargaActual(double cargaActual) {
+        this.cargaActual = cargaActual;
     }
 
     public String getEstado() {

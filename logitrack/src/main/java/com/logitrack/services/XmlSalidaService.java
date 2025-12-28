@@ -16,16 +16,25 @@ public class XmlSalidaService {
 
         // estadistica
         xml.append("  <estadisticas>\n");
+
+        long paquetesProcesados = DataStore.paquetes.values().stream()
+                .filter(p -> p.getEstado() != null && !"PENDIENTE".equalsIgnoreCase(p.getEstado()))
+                .count();
+
+        long solicitudesAtendidas = DataStore.solicitudesHistorial.stream()
+                .filter(s -> s.getEstado() != null && "ATENDIDA".equalsIgnoreCase(s.getEstado()))
+                .count();
+
         xml.append("    <paquetesProcesados>")
-                .append(DataStore.paquetes.size())
+                .append(paquetesProcesados)
                 .append("</paquetesProcesados>\n");
 
         xml.append("    <solicitudesAtendidas>")
-                .append(DataStore.solicitudes.size())
+                .append(solicitudesAtendidas)
                 .append("</solicitudesAtendidas>\n");
 
         long mensajerosActivos = DataStore.mensajeros.values().stream()
-                .filter(m -> m.getEstado().equals("EN_TRANSITO"))
+                .filter(m -> m.getEstado() != null && m.getEstado().equals("EN TRANSITO"))
                 .count();
 
         xml.append("    <mensajerosActivos>")
@@ -38,13 +47,22 @@ public class XmlSalidaService {
         xml.append("  <centros>\n");
         for (Centro c : DataStore.centros.values()) {
             xml.append("    <centro id=\"").append(c.getId()).append("\">\n");
+
+            int paquetesActuales = 0;
+            if (c.getPaquetes() != null) {
+                paquetesActuales = c.getPaquetes().size();
+            }
+
             xml.append("      <paquetesActuales>")
-                    .append(c.getPaquetes().size())
+                    .append(paquetesActuales)
                     .append("</paquetesActuales>\n");
 
-            long disponibles = c.getMensajeros().stream()
-                    .filter(m -> m.getEstado().equals("DISPONIBLE"))
-                    .count();
+            long disponibles = 0;
+            if (c.getMensajeros() != null) {
+                disponibles = c.getMensajeros().stream()
+                        .filter(m -> m.getEstado() != null && m.getEstado().equals("DISPONIBLE"))
+                        .count();
+            }
 
             xml.append("      <mensajerosDisponibles>")
                     .append(disponibles)
@@ -79,7 +97,7 @@ public class XmlSalidaService {
 
         // solicitudes
         xml.append("  <solicitudes>\n");
-        for (Solicitud s : DataStore.solicitudes) {
+        for (Solicitud s : DataStore.solicitudesHistorial) {
             xml.append("    <solicitud id=\"")
                     .append(s.getId())
                     .append("\" estado=\"")

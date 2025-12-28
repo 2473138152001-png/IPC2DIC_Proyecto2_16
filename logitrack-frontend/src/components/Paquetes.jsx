@@ -219,7 +219,7 @@ function Paquetes(props) {
           onChange={(e) => setEstadoPaqueteActualizar(e.target.value)}
         >
           <option value="PENDIENTE">PENDIENTE</option>
-          <option value="EN_TRANSITO">EN_TRANSITO</option>
+          <option value="EN TRANSITO">EN_TRANSITO</option>
           <option value="ENTREGADO">ENTREGADO</option>
         </select>
 

@@ -6,14 +6,7 @@ import {
   eliminarRuta
 } from "../api/api";
 
-/*
- * Componente Rutas
- * Función:
- * - GET /api/rutas (listar)
- * - POST /api/rutas (crear)
- * - PUT /api/rutas/{id} (actualizar)
- * - DELETE /api/rutas/{id} (eliminar)
- */
+
 function Rutas(props) {
 
   // -------- estados --------

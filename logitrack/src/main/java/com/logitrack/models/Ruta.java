@@ -6,8 +6,6 @@ public class Ruta {
     private String origen;
     private String destino;
     private int distancia;
-
-    // ✅ constructor vacío (obligatorio para JSON)
     public Ruta() {
     }
 
@@ -22,7 +20,6 @@ public class Ruta {
         return id;
     }
 
-    // ✅ setter faltante
     public void setId(String id) {
         this.id = id;
     }

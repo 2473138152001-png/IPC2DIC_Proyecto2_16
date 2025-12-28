@@ -55,7 +55,7 @@ public class mensajeroController {
             );
         }
 
-        // ✅ si viene estado vacío desde JSON, lo dejamos DISPONIBLE
+        // si viene estado vacío desde JSON, lo dejamos DISPONIBLE
         if (nuevo.getEstado() == null || nuevo.getEstado().trim().isEmpty()) {
             nuevo.setEstado("DISPONIBLE");
         }
@@ -66,7 +66,7 @@ public class mensajeroController {
         return nuevo;
     }
 
-    // PUT - Cambiar estado
+    // Cambiar estado
     @PutMapping("/{id}/estado")
     public Mensajero cambiarEstado(@PathVariable String id,
                                    @RequestBody String estado) {
@@ -79,7 +79,7 @@ public class mensajeroController {
             );
         }
 
-        // ✅ limpiar comillas/espacios del body
+        // limpiar comillas o espacios del body
         if (estado != null) {
             estado = estado.trim();
             if (estado.startsWith("\"") && estado.endsWith("\"") && estado.length() >= 2) {
@@ -87,7 +87,7 @@ public class mensajeroController {
             }
         }
 
-        if (!"DISPONIBLE".equals(estado) && !"EN_TRANSITO".equals(estado)) {
+        if (!"DISPONIBLE".equals(estado) && !"EN TRANSITO".equals(estado)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Estado inválido"
@@ -98,7 +98,7 @@ public class mensajeroController {
         return m;
     }
 
-    // PUT - Cambiar centro
+    //Cambiar centro
     @PutMapping("/{id}/centro")
     public Mensajero cambiarCentro(@PathVariable String id,
                                    @RequestBody String nuevoCentroId) {
@@ -118,7 +118,7 @@ public class mensajeroController {
             );
         }
 
-        // ✅ limpiar comillas/espacios del body
+        // limpiar comillas o espacios del body
         if (nuevoCentroId != null) {
             nuevoCentroId = nuevoCentroId.trim();
             if (nuevoCentroId.startsWith("\"") && nuevoCentroId.endsWith("\"") && nuevoCentroId.length() >= 2) {

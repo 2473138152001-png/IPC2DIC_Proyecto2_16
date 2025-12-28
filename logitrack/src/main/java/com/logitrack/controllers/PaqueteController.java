@@ -13,13 +13,13 @@ import java.util.Collection;
 @RequestMapping("/api/paquetes")
 public class PaqueteController {
 
-    // GET - Listar todos
+    //Listar todos
     @GetMapping
     public Collection<Paquete> listarPaquetes() {
         return DataStore.paquetes.values();
     }
 
-    // GET - Obtener por ID
+    //Obtener por ID
     @GetMapping("/{id}")
     public Paquete obtenerPaquete(@PathVariable String id) {
         Paquete p = DataStore.paquetes.get(id);
@@ -32,7 +32,7 @@ public class PaqueteController {
         return p;
     }
 
-    // POST - Crear paquete
+    //Crear paquete
     @PostMapping
     public Paquete crearPaquete(@RequestBody Paquete nuevo) {
 
@@ -59,13 +59,13 @@ public class PaqueteController {
             );
         }
 
-        // ✅ el estado real lo controla el sistema
+        // el estado real lo controla el sistema
         nuevo.setEstado("PENDIENTE");
 
         // guardar
         DataStore.paquetes.put(nuevo.getId(), nuevo);
 
-        // agregar al centro actual (si existe)
+        // agregar al centro actual si existe
         Centro centroActual = DataStore.centros.get(nuevo.getCentroActual());
         if (centroActual != null) {
             centroActual.getPaquetes().add(nuevo);
@@ -74,7 +74,7 @@ public class PaqueteController {
         return nuevo;
     }
 
-    // PUT - Actualizar paquete (estado y/o centroActual)
+    //Actualizar paquete (estado y/o centroActual)
     @PutMapping("/{id}")
     public Paquete actualizarPaquete(@PathVariable String id,
                                      @RequestBody Paquete datos) {
@@ -87,12 +87,12 @@ public class PaqueteController {
             );
         }
 
-        // ✅ si mandan estado, se actualiza
+        // si mandan estado se actualiza
         if (datos.getEstado() != null && !datos.getEstado().trim().isEmpty()) {
             p.setEstado(datos.getEstado().trim());
         }
 
-        // ✅ si mandan centroActual, validar y mover de listas
+        // si mandan centroActual validar y mover de listas
         if (datos.getCentroActual() != null && !datos.getCentroActual().trim().isEmpty()) {
 
             String nuevoCentroId = datos.getCentroActual().trim();
@@ -114,14 +114,13 @@ public class PaqueteController {
             // agregar al nuevo centro
             nuevoCentro.getPaquetes().add(p);
 
-            // setear
             p.setCentroActual(nuevoCentroId);
         }
 
         return p;
     }
 
-    // DELETE - Eliminar paquete
+    //Eliminar paquete
     @DeleteMapping("/{id}")
     public void eliminarPaquete(@PathVariable String id) {
 
@@ -133,7 +132,7 @@ public class PaqueteController {
             );
         }
 
-        if ("EN_TRANSITO".equals(p.getEstado()) ||
+        if ("EN TRANSITO".equals(p.getEstado()) ||
                 "ENTREGADO".equals(p.getEstado())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,

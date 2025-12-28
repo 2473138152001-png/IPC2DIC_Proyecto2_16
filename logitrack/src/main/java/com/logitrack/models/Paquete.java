@@ -9,8 +9,10 @@ public class Paquete {
     private String estado;
     private String centroActual;
     private String ultimaActualizacion;
+    private String mensajeroAsignadoId;
+    private String rutaAsignadaId;
 
-    // ✅ Constructor vacío para JSON
+    // Constructor vacío para permitir deserialización JSON
     public Paquete() {
     }
 
@@ -27,7 +29,6 @@ public class Paquete {
         return id;
     }
 
-    // ✅ setters necesarios para JSON
     public void setId(String id) {
         this.id = id;
     }
@@ -60,6 +61,7 @@ public class Paquete {
         return estado;
     }
 
+    // Estado del paquete
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -78,5 +80,21 @@ public class Paquete {
 
     public void setUltimaActualizacion(String ultimaActualizacion) {
         this.ultimaActualizacion = ultimaActualizacion;
+    }
+
+    public String getMensajeroAsignadoId() {
+        return mensajeroAsignadoId;
+    }
+
+    public void setMensajeroAsignadoId(String mensajeroAsignadoId) {
+        this.mensajeroAsignadoId = mensajeroAsignadoId;
+    }
+
+    public String getRutaAsignadaId() {
+        return rutaAsignadaId;
+    }
+
+    public void setRutaAsignadaId(String rutaAsignadaId) {
+        this.rutaAsignadaId = rutaAsignadaId;
     }
 }

@@ -7,6 +7,10 @@ public class Solicitud {
     private String paqueteId;
     private int prioridad;
     private String estado;
+    private String motivo;
+
+    public Solicitud() {
+    }
 
     public Solicitud(String id, String tipo, String paqueteId, int prioridad, String estado) {
         this.id = id;
@@ -38,5 +42,29 @@ public class Solicitud {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setPaqueteId(String paqueteId) {
+        this.paqueteId = paqueteId;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Collection;
 @RequestMapping("/api/rutas")
 public class RutaController {
 
-    // GET listar todas las rutas
+    // listar todas las rutas
     @GetMapping
     public Collection<Ruta> listarRutas() {
         return DataStore.rutas.values();
@@ -57,7 +57,7 @@ public class RutaController {
         return nuevaRuta;
     }
 
-    // PUT actualizar ruta
+    // actualizar ruta
     @PutMapping("/{id}")
     public Ruta actualizarRuta(@PathVariable String id,
                                @RequestBody Ruta datos) {
@@ -70,7 +70,7 @@ public class RutaController {
             );
         }
 
-        // ✅ CORRECCIÓN REAL
+        // CORRECCIÓN REAL
         ruta.setOrigen(datos.getOrigen());
         ruta.setDestino(datos.getDestino());
         ruta.setDistancia(datos.getDistancia());
@@ -78,7 +78,7 @@ public class RutaController {
         return ruta;
     }
 
-    // DELETE eliminar ruta
+    // eliminar ruta
     @DeleteMapping("/{id}")
     public void eliminarRuta(@PathVariable String id) {
 

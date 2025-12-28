@@ -203,7 +203,7 @@ function Mensajeros(props) {
           onChange={(e) => setEstadoNuevo(e.target.value)}
         >
           <option value="DISPONIBLE">DISPONIBLE</option>
-          <option value="EN_TRANSITO">EN_TRANSITO</option>
+          <option value="EN TRANSITO">EN_TRANSITO</option>
         </select>
 
         <button

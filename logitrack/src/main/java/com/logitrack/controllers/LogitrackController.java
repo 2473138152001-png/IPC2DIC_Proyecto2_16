@@ -26,7 +26,7 @@ public class LogitrackController {
     private ProcesamientoService procesamientoService;
 
     // ----------------------------
-    // GET - CONSULTAS
+    //CONSULTAS
     // ----------------------------
 
     @GetMapping("/centros")
@@ -72,7 +72,7 @@ public class LogitrackController {
 
 
     // ----------------------------
-    // POST - ACCIONES
+    //ACCIONES
     // ----------------------------
 
     @PostMapping("/importar")
