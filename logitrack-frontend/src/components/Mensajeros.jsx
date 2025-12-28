@@ -8,12 +8,10 @@ import {
 
 /*
  * Componente Mensajeros
- * Función:
- * - GET /api/mensajeros (listar)
- * - POST /api/mensajeros (crear)
- * - PUT /api/mensajeros/{id}/estado (cambiar estado)
- * - PUT /api/mensajeros/{id}/centro (cambiar centro)
+ * Permite gestionar los mensajeros del sistema: listar, crear,
+ * cambiar su estado y reasignar el centro al que pertenecen.
  */
+
 function Mensajeros(props) {
 
   // -------- estados --------

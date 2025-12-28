@@ -2,9 +2,10 @@ import React from "react";
 
 /*
  * Componente Navbar
- * Función: mostrar el menú principal del sistema
- * y cambiar la vista activa según la opción seleccionada
+ * Muestra el menú principal y permite cambiar
+ * entre las distintas vistas del sistema.
  */
+
 function Navbar(props) {
 
   // -------- constantes --------

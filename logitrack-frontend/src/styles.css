@@ -1,3 +1,10 @@
+/*
+ * Estilos base del frontend
+ * Define la apariencia general del sistema LogiTrack,
+ * incluyendo layout, tarjetas, botones, formularios
+ * y la barra de navegación.
+ */
+
 /* fuente general */
 :root {
   font-family: Arial, system-ui, sans-serif;

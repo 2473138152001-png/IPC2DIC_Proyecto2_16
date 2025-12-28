@@ -7,10 +7,9 @@ import {
 
 /*
  * Componente Envios
- * Función:
- * - Asignación directa (PUT /api/envios/asignar)
- * - Cambiar estado de envío (PUT /api/envios/{paqueteId}/estado)
- * - Generar XML de salida (GET /api/xml/salida)
+ * Maneja la asignación directa de paquetes a mensajeros,
+ * el cambio de estado de los envíos y la generación/descarga
+ * del XML de salida consumiendo el backend.
  */
 function Envios(props) {
 
@@ -28,7 +27,7 @@ function Envios(props) {
   // xml salida
   const [xmlSalida, setXmlSalida] = useState("");
 
-  // -------- métodos --------
+
   function limpiarMensajes() {
     props.setError("");
     props.setOk("");

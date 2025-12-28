@@ -8,12 +8,10 @@ import {
 
 /*
  * Componente Paquetes
- * Función:
- * - GET /api/paquetes (listar)
- * - POST /api/paquetes (crear)
- * - PUT /api/paquetes/{id} (actualizar)
- * - DELETE /api/paquetes/{id} (eliminar)
+ * Permite administrar los paquetes del sistema:
+ * listar, crear, actualizar y eliminar registros.
  */
+
 function Paquetes(props) {
 
   // -------- estados --------

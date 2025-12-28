@@ -5,6 +5,11 @@ import {
   actualizarRuta,
   eliminarRuta
 } from "../api/api";
+/*
+ * Componente Rutas
+ * Permite gestionar las rutas del sistema,
+ * incluyendo su creación, actualización, listado y eliminación.
+ */
 
 
 function Rutas(props) {

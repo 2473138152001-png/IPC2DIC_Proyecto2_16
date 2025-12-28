@@ -8,11 +8,10 @@ import { getCentros } from "../api/api";
  */
 function Centros(props) {
 
-  //estados
+
   const [listaCentros, setListaCentros] = useState([]);
   const [estaCargando, setEstaCargando] = useState(false);
 
-  //métodos 
   async function cargarCentros() {
     props.setError("");
     props.setOk("");

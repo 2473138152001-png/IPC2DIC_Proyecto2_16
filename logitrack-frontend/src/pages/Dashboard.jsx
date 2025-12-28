@@ -8,6 +8,11 @@ import Paquetes from "../components/Paquetes";
 import Solicitudes from "../components/Solicitudes";
 import Envios from "../components/Envios";
 import Mensajes from "../components/Mensajes";
+/*
+ * Componente Dashboard
+ * Controla la navegación principal del sistema
+ * y muestra la vista correspondiente según la opción seleccionada.
+ */
 
 export default function Dashboard() {
   const [tab, setTab] = useState("importar");

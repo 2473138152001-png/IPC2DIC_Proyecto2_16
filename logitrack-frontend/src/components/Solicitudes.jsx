@@ -9,13 +9,11 @@ import {
 
 /*
  * Componente Solicitudes
- * Función: manejar la cola de prioridad de solicitudes
- * - Consultar la cola
- * - Crear solicitudes
- * - Eliminar solicitudes
- * - Procesar la solicitud más prioritaria
- * - Procesar N solicitudes
+ * Gestiona la cola de prioridad de solicitudes,
+ * permitiendo crearlas, eliminarlas y procesarlas
+ * de forma individual o por cantidad.
  */
+
 function Solicitudes(props) {
 
   // -------- estados --------

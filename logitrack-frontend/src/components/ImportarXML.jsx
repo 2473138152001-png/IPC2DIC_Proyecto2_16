@@ -3,8 +3,8 @@ import { importarXML } from "../api/api";
 
 /*
  * Componente ImportarXML
- * Función: enviar un archivo XML al backend (POST /api/importar)
- * El backend debe cargar: centros, rutas, mensajeros, paquetes, solicitudes
+ * Permite cargar el archivo XML inicial y enviarlo al backend
+ * para registrar los datos base del sistema.
  */
 function ImportarXML(props) {
 
@@ -13,7 +13,6 @@ function ImportarXML(props) {
   const [estaCargando, setEstaCargando] = useState(false);
   const [textoRespuesta, setTextoRespuesta] = useState("");
 
-  // -------- métodos --------
   function limpiarMensajes() {
     props.setError("");
     props.setOk("");
